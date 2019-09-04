@@ -1,21 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Disney Word Guess Game</title>
 </head>
+
 <body>
-    <p>Press any key to get started!</p>
-    <br>
-    <p>Current Word:</p>
-    <p>_ _ _ _ _</p>
-    <br>
-    <p>Number of guesses remaining:</p>
-    <p>12</p>
-    <br>
-    <p>Letters already guessed:</p>
-    <p></p>
+    <div id="game">
+        <p>Press any key to get started!</p>
+        <br>
+        <p>Current Word:</p>
+        <p id="currentWord">_ _ _ _ _<span id="currentWord-text"></span></p>
+        <br>
+        <p>Number of guesses remaining:</p>
+        <p id="turnCountdown">12<span id="turnCountdown-text"></span></p>
+        <br>
+        <p>Letters already guessed:</p>
+        <p id="lettersGuessed">None yet!<span id="lettersGuessed-text"></span></p>
+    </div>
+
+    <script type="text/javascript">
+    
+        //might need a separate var for turnCountDown
+    
+    var disneyWords = ["ARIEL","RAPUNZEL","CINDERELLA","SNOW WHITE","MOANA","MERIDA","MULAN","POCAHONTAS","BELLE","TIANA","AURORA"];
+    var turnCountdown = document.getElementById("turnCountdown-text");
+    var currentWord = document.getElementById("currentWord-text");
+    var lettersGuessed = document.getElementById("lettersGuessed-text");
+    
+    
+    
+    
+    
+    </script>
 </body>
+
 </html>
