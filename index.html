@@ -16,13 +16,14 @@
         <p id="currentWord"><span id="currentWord-text"></span></p>
         <br>
         <p>Number of guesses remaining:</p>
-        <p id="turnCountdown">12<span id="turnCountdown-text"></span></p>
+        <p id="turnCountdown"><span id="turnCountdown-text"></span></p>
         <br>
         <p>Letters already guessed:</p>
-        <p id="lettersGuessed">None yet!<span id="lettersGuessed-text"></span></p>
+        <p id="lettersGuessed"><span id="lettersGuessed-text"></span></p>
         <p>Wins:</p>
         <p id="wins"><span id="wins-text"></span></p>
     </div>
+
 
     <script type="text/javascript">
         //trying this first with no spaces between the underscores for the blank word
@@ -32,41 +33,49 @@
         var turnCountdown = document.getElementById("turnCountdown-text");
         var currentWord = document.getElementById("currentWord-text");
         var lettersGuessed = document.getElementById("lettersGuessed-text");
-
-
-
+        var blanks = " ";
+        var blankSpace = function (princess) {
+            for (var i = 0; i < princess.length; i++) {
+                //skipping spaces for now, also using an X because it's easier to see how many there are
+                currentWord.textContent += "_";
+            }
+        }
+        var computerChoice = disneyWords[Math.floor(Math.random() * disneyWords.length)];
+        console.log(computerChoice);
+        //following function will hopefully generate a number of blank spaces equal to the length of the computer's chosen word
+        //testing a function to show the blank spaces on the screen
+        var turns=12;
         //probably need something so that the first key pressed doesn't count
         document.onkeyup = function (event) {
-            var userGuess = event.key;
-            var computerChoice = disneyWords[Math.floor(Math.random() * disneyWords.length)];
-            console.log(computerChoice);
-
-            //following function will hopefully generate a number of blank spaces equal to the length of the computer's chosen word
-            //testing a function to show the blank spaces on the screen
-            var blankSpace = function (princess) {
-                for (var i = 0; i < princess.length; i++) {
-                    //skipping spaces for now, also using a slash because it's easier to see how many there are
-                    currentWord.textContent = "/";
-                    console.log(currentword);
-                }
-            }
+            //how do i make this happen?
             blankSpace(computerChoice);
 
-            if (userGuess === ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]) {
+            document.onkeyup = function (event) {
+                var userGuess = event.key;
+                //need line for only running code if alphabet key pressed
+
                 //following for loop attempts to compare the user letter to the computer's chosen word
                 for (var i = 0; i < computerChoice.length; i++) {
                     if (userGuess === computerChoice[i]) {
+                        console.log(computerChoice[i]);
                         //overwrite current word - might need to do this letter by letter? not sure
-                        currentWord.textContent = userGuess;
-                    } else {
-                        //adding letters to the letters guessed section
-                    } lettersGuessed.textContent = " " + userGuess;
+                        currentWord.textContent[i] = userGuess;
+                    }                        
+                    //adding letters to the letters guessed section
                 }
-                turnCountdown--;
+                lettersGuessed.textContent += " " + userGuess;
+                turns--;
+                turnCountdown.textContent = turns;
             }
-        }
+            }
+
+        
+
+
+
 
     </script>
+
 </body>
 
 </html>
