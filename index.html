@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="jquery-3.4.1.js"></script>
     <title>Disney Word Guess Game</title>
 </head>
 
@@ -13,10 +14,10 @@
         <p>Press any key to get started!</p>
         <br>
         <p>Current Word:</p>
-        <p id="currentWord"><span id="currentWord-text"></span></p>
+        <p id="currentWord"><span id="currentWord-text" class="blankText"></span></p>
         <br>
         <p>Number of guesses remaining:</p>
-        <p id="turnCountdown"><span id="turnCountdown-text"></span></p>
+        <p id="turnCountdown"><span id="turnCountdown-text">12</span></p>
         <br>
         <p>Letters already guessed:</p>
         <p id="lettersGuessed"><span id="lettersGuessed-text"></span></p>
@@ -28,7 +29,7 @@
     <script type="text/javascript">
         //trying this first with no spaces between the underscores for the blank word
         //might need a separate var for turnCountDown
-//look up QUERY SELECTOR
+        //look up QUERY SELECTOR
         var disneyWords = ["ariel", "rapunzel", "cinderella", "snowwhite", "moana", "merida", "mulan", "pocahontas", "belle", "tiana", "aurora"];
         var turnCountdown = document.getElementById("turnCountdown-text");
         var currentWord = document.getElementById("currentWord-text");
@@ -37,9 +38,11 @@
         var blankSpace = function (princess) {
             for (var i = 0; i < princess.length; i++) {
                 //skipping spaces for now, also using an X because it's easier to see how many there are
-                currentWord.textContent += "_";
+                currentWord.textContent += "X";
             }
         }
+
+
 
         var computerChoice = disneyWords[Math.floor(Math.random() * disneyWords.length)];
         console.log(computerChoice);
@@ -51,22 +54,28 @@
         document.onkeyup = function (event) {
             //how do i make this happen?
             blankSpace(computerChoice);
-
+            var spaces = toString(currentWord);
+            var spaces2 = $(".blankText").text();
+            console.log(spaces2);
             document.onkeyup = function (event) {
                 var userGuess = event.key;
+                var revealedWord = spaces2;
                 //need line for only running code if alphabet key pressed
                 //following for loop attempts to compare the user letter to the computer's chosen word
                 for (var i = 0; i < computerChoice.length; i++) {
                     if (userGuess === computerChoice[i]) {
                         //overwrite current word - might need to do this letter by letter? not sure
                         console.log("this loop worked");
-                        currentWord.textContent = userGuess;
+                        revealedWord = revealedWord.replace(revealedWord[i],userGuess);
+                        console.log(revealedWord);
+                        return revealedWord;
                     }
                     //adding letters to the letters guessed section
                 }
                 lettersGuessed.textContent += " " + userGuess;
                 turns--;
                 turnCountdown.textContent = turns;
+                currentWord.textContent = revealedWord;
             }
         }
 
